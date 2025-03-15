@@ -5,9 +5,8 @@ class Game:
     # 初始化
     def __init__(self, brick_manager):
         self.brick_manager = brick_manager
-        # 方塊在容器的位置
-        self.container_x = 3
-        self.container_y =-4
+        self.debug_message = False
+        self.lines_number_max = 0
 
         # 方塊陣列(10x20)
         self.bricks_array = []
@@ -19,51 +18,40 @@ class Game:
         for i in range(4):
             self.bricks.append([0]*4)
     
-        self.debug_message = False
-        
-        self.game_over = False
+        self.resetGame()
+
+        self.brick_next_id = random.randint(1, 7)
+
+    # 重製遊戲狀態
+    def resetGame(self):
+        self.container_x = 3
+        self.container_y =-4
 
         self.brick_down_speed = brick_down_speed_max
-
-        # 方塊編號(1~7)
+        
         self.brick_id = 1
-        # 方塊狀態(0~3)
         self.brick_state = 0
-
-        self.brick_next_id = 1
-
-        self.lines_number_max = 0
         
         self.lines_number = 0
-
-        # 遊戲狀態(0/1)
         self.game_mode = 0
-
         self.game_level = 1
+        self.game_over = False
 
-    def resetGame(self):
-        # 清除磚塊陣列.
+        # 清除方塊陣列(10x20)
         for x in range(10):
             for y in range(20):
                 self.bricks_array[x][y] = 0
             
-        # 清除方塊陣列.
+        # 清除方塊陣列(4x4)
         for x in range(4):
             for y in range(4):
                 self.bricks[x][y] = 0
 
-        # 初始磚塊下降速度.
-        self.brick_down_speed = brick_down_speed_max
-
-        # 最大連線數.
+        # 最大連線數
         if(self.lines_number > self.lines_number_max):
             self.lines_number_max = self.lines_number
-        # 連線數.
-        self.lines_number = 0
 
-        self.game_level = 1
-
-    # 判定清除的方塊
+    # 判斷方塊可不可以消除
     def ifClearBrick(self):
         pointNum = 0
         lineNum = 0
@@ -78,9 +66,8 @@ class Game:
             pointNum = 0
         return lineNum
 
-    # 清除方塊
+    # 消除方塊
     def clearBrick(self):
-        # 逐列清除方塊
         temp = 0    
         for x in range(10):
             for i in range(19):
@@ -93,9 +80,9 @@ class Game:
                             y = y - 1
                 self.bricks_array[x][0] = 0
 
-    # 產生新方塊
+    # 生成新方塊
     def brickNew(self):
-        # 判斷遊戲結束
+        # 判斷GameOver
         self.game_over = False
         if (self.container_y < 0):
             self.game_over = True
@@ -104,31 +91,26 @@ class Game:
         self.container_y = self.container_y - 1
         self.brick_manager.copyToBricksArray(self.container_x, self.container_y, self.bricks_array)  
     
-        # 判斷與設定要清除的方塊
+        # 判斷與設定要消除的方塊
         lines = self.ifClearBrick() // 10;        
         if (lines > 0):
-            # 消除數增加
             self.lines_number = self.lines_number + lines
 
             # 每消10行等級+1
             if self.lines_number >= self.game_level * 10:
                 self.game_level += 1
-                # 速度提高
                 self.brick_down_speed = max(brick_down_speed_max - (self.game_level * 0.05), 0.1)
 
             self.game_mode = 1
 
-        # 初始方塊位置
+        # 設定當前、下一個方塊的狀態
         self.container_x = 3
         self.container_y =-4
 
-        # 現在出現方塊
         self.brick_id = self.brick_next_id
 
-        # 下個出現方塊
         self.brick_next_id = random.randint( 1, 7)
         self.brick_state = 0
 
-        # GameOver
         if (self.game_over):
             self.resetGame()
