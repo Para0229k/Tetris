@@ -1,7 +1,7 @@
 from constant import brick_dict
 
 class BrickManager:
-    # 初始化
+    # 初始化方塊
     def __init__(self):
         self.bricks = []
         for i in range(4):
@@ -15,17 +15,16 @@ class BrickManager:
         for i in range(4):
             self.bricks_next_object.append([0]*4)
 
-    # 取得方塊索引
+    # 取得方塊的index
     def getBrickIndex(self, brickId, state):
         brickKey = str(brickId)+str(state)
         return brick_dict[brickKey]
 
-    # 將索引轉換成方塊
+    # 將index轉換成方塊
     def transformToBricks(self, brickId, state):
         for x in range(4):
             for y in range(4):
                 self.bricks[x][y] = 0
-     
         p_brick = self.getBrickIndex(brickId, state)
     
         # 轉換
@@ -34,7 +33,7 @@ class BrickManager:
             by = int(p_brick[i] / 4)
             self.bricks[bx][by] = brickId
 
-    # 判斷方塊可不可以複製到容器中
+    # 判斷方塊可否複製到容器中
     def ifCopyToBricksArray(self, container_x, container_y, bricks_array):
         for x in range(4):
             for y in range(4):
@@ -65,19 +64,15 @@ class BrickManager:
             for x in range(4):
                 self.bricks_next[x][y] = 0
 
-        # 取得方塊索引
+        # 生成下一個方塊
         pBrick = self.getBrickIndex(brickId, 0)
-
-        # 將索引轉換成方塊
         for i in range(4):
             bx = int(pBrick[i] % 4)
             by = int(pBrick[i] / 4)
             self.bricks_next[bx][by] = brickId
 
-        # 更新背景
+        # 更新背景和方塊
         background_bricks_next.update()
-
-        # 更新方塊
         pos_y = 52
         for y in range(4):
             pos_x = 592
