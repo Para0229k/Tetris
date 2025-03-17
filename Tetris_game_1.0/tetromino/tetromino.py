@@ -15,6 +15,14 @@ class BrickManager:
         for i in range(4):
             self.bricks_next_object.append([0]*4)
 
+        self.bricks_hold = []
+        for i in range(4):
+            self.bricks_hold.append([0]*4)
+
+        self.bricks_hold_object = []
+        for i in range(4):
+            self.bricks_hold_object.append([0]*4)
+
     # 取得方塊的index
     def getBrickIndex(self, brickId, state):
         brickKey = str(brickId)+str(state)
@@ -81,5 +89,32 @@ class BrickManager:
                     self.bricks_next_object[x][y].rect[0] = pos_x
                     self.bricks_next_object[x][y].rect[1] = pos_y
                     self.bricks_next_object[x][y].update()
+                pos_x = pos_x + 28        
+            pos_y = pos_y + 28
+    
+    # Hold的方塊
+    def updateHoldBricks(self, hold_id, background_hold):
+        for y in range(4):
+            for x in range(4):
+                self.bricks_hold[x][y] = 0
+        
+        # 生成Hold的方塊
+        if hold_id > 0:
+            pBrick = self.getBrickIndex(hold_id, 0)
+            for i in range(4):
+                bx = int(pBrick[i] % 4)
+                by = int(pBrick[i] / 4)
+                self.bricks_hold[bx][by] = hold_id
+        
+        # 更新背景、方塊
+        background_hold.update()
+        pos_y = 430
+        for y in range(4):
+            pos_x = 592
+            for x in range(4):
+                if(self.bricks_hold[x][y] != 0):
+                    self.bricks_hold_object[x][y].rect[0] = pos_x
+                    self.bricks_hold_object[x][y].rect[1] = pos_y
+                    self.bricks_hold_object[x][y].update()
                 pos_x = pos_x + 28        
             pos_y = pos_y + 28
