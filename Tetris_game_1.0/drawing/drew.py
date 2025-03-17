@@ -30,9 +30,10 @@ class Display:
         self.canvas.blit(text, (x, y))
 
     # 更新顯示器
-    def updateGameDisplay(self, game, brick_manager, background, background_brick_next, brick_list):
+    def updateGameDisplay(self, game, brick_manager, background, background_brick_next, background_brick_hold, brick_list):
         # 更新背景區域
         brick_manager.updateNextBricks(game.brick_next_id, background_brick_next)
+        brick_manager.updateHoldBricks(game.hold_id, background_brick_hold)
         pos_y = 20
         background.update()
         
@@ -96,6 +97,8 @@ class Display:
 
         self.showFont("Level", 588, 330, color_gray)
         self.showFont(str(int(game.game_level)), 588, 360, color_gray)
+
+        self.showFont("Hold", 588, 400, color_gray)
 
         # 在除錯訊息顯示FPS
         if(game.debug_message):    
