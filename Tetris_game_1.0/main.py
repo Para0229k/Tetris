@@ -32,14 +32,20 @@ def main():
             row.append(Box(pygame, canvas, "brick_x_" + str(x) + "_y_" + str(y), [ 0, 0, 26, 26], color_gray_block))
         bricks_list.append(row)
     
-    # 把方塊放入陣列(4x4)
+    # 把Next方塊放入陣列(4x4)
     for y in range(4):
         for x in range(4):
-            brick_manager.bricks_next_object[x][y] = Box(pygame, canvas, "brick_next_x_" + str(x) + "_y_" + str(y), [ 0, 0, 26, 26], color_gray_block)
+            brick_manager.bricks_next_object[x][y] = Box(pygame, canvas, "brick_next_x_" + str(x) + "_y_" + str(y), [0, 0, 26, 26], color_gray_block)
+
+    # 把Hold方塊放入陣列(4x4)
+    for y in range(4):
+        for x in range(4):
+            brick_manager.bricks_hold_object[x][y] = Box(pygame, canvas, "brick_hold_x" + str(x) + "_y_" + str(y), [0, 0, 26, 26], color_gray_block)
 
     # 背景
     background = Box(pygame, canvas, "background", [278, 18, 282, 562], color_gray)
     background_bricks_next = Box(pygame, canvas, "background_bricks_next", [590, 50, 114, 114], color_gray)
+    background_bricks_hold = Box(pygame, canvas, "background_bricks_hold", [590, 430, 114, 114], color_gray)
 
     # 隨機產生新方塊
     game.brick_next_id = random.randint( 1, 7)   
@@ -66,7 +72,11 @@ def main():
                     running = False
                 # D - 除錯訊息
                 elif event.key == pygame.K_d:
-                    game.debug_message = not game.debug_message                
+                    game.debug_message = not game.debug_message
+                # 空白鍵 - Hold
+                elif event.key == pygame.K_SPACE and game.game_mode == 0 and game.can_hold:
+                    game.holdBrick()
+                    brick_manager.transformToBricks(game.brick_id, game.brick_state)    
                 # 上 - 旋轉
                 elif event.key == pygame.K_UP and game.game_mode == 0:
                     # 保存當前狀態
@@ -173,7 +183,7 @@ def main():
             brick_manager.transformToBricks(game.brick_id, game.brick_state)
 
         # 更新顯示內容
-        display.updateGameDisplay(game, brick_manager, background, background_bricks_next, bricks_list)
+        display.updateGameDisplay(game, brick_manager, background, background_bricks_next, background_bricks_hold, bricks_list)
         display.displayDebugInfo(game, brick_manager)
         display.displayGameInfo(game, clock)
         pygame.display.update()
