@@ -22,10 +22,13 @@ class Game:
 
         self.brick_next_id = random.randint(1, 7)
 
+        self.hold_id = 0
+        self.can_hold = True
+
     # 重製遊戲狀態
     def resetGame(self):
         self.container_x = 3
-        self.container_y =-4
+        self.container_y = -4
 
         self.brick_down_speed = brick_down_speed_max
         
@@ -36,6 +39,9 @@ class Game:
         self.game_mode = 0
         self.game_level = 1
         self.game_over = False
+
+        self.hold_id = 0
+        self.can_hold = True
 
         # 清除方塊陣列(10x20)
         for x in range(10):
@@ -91,9 +97,12 @@ class Game:
         self.container_y = self.container_y - 1
         self.brick_manager.copyToBricksArray(self.container_x, self.container_y, self.bricks_array)  
     
-        # 判斷與設定要消除的方塊
+        # 消除方塊行數計算
         lines = self.ifClearBrick() // 10;        
         if (lines > 0):
+            if lines > self.lines_number_max:
+                self.lines_number_max = lines
+            
             self.lines_number = self.lines_number + lines
 
             # 每消10行等級+1
@@ -105,12 +114,41 @@ class Game:
 
         # 設定當前、下一個方塊的狀態
         self.container_x = 3
-        self.container_y =-4
+        self.container_y = -4
 
         self.brick_id = self.brick_next_id
 
-        self.brick_next_id = random.randint( 1, 7)
+        self.brick_next_id = random.randint(1, 7)
         self.brick_state = 0
 
+        self.can_hold = True
+
         if (self.game_over):
+            old_max = self.lines_number_max
             self.resetGame()
+            self.lines_number_max = old_max
+
+    # Hold功能處理
+    def holdBrick(self):
+        if not self.can_hold:
+            return
+        
+        # 第一次用
+        if self.hold_id == 0:
+            self.hold_id = self.brick_id
+            self.brick_id = self.brick_next_id
+            self.brick_next_id = random.randint(1, 7)
+        # 第二次以上
+        else:
+            temp = self.brick_id
+            self.brick_id = self.hold_id
+            self.hold_id = temp
+
+        # 重製方塊
+        self.container_x = 3
+        self.container_y = -4
+        self.brick_state = 0
+
+        self.brick_manager.transformToBricks(self.brick_id, self.brick_state)
+
+        self.can_hold = False
