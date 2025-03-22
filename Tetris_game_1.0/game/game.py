@@ -7,6 +7,7 @@ class Game:
         self.brick_manager = brick_manager
         self.debug_message = False
         self.lines_number_max = 0
+        self.score = 0
 
         # 方塊陣列(10x20)
         self.bricks_array = []
@@ -39,6 +40,7 @@ class Game:
         self.game_mode = 0
         self.game_level = 1
         self.game_over = False
+        self.score = 0
 
         self.hold_id = 0
         self.can_hold = True
@@ -86,6 +88,19 @@ class Game:
                             y = y - 1
                 self.bricks_array[x][0] = 0
 
+    # 計分
+    def calculateScore(self, lines):
+        if lines == 1:
+            return 1000
+        elif lines == 2:
+            return 3000
+        elif lines == 3:
+            return 5000
+        elif lines == 4:
+            return 8000
+        else:
+            return 0
+
     # 生成新方塊
     def brickNew(self):
         # 判斷GameOver
@@ -97,7 +112,7 @@ class Game:
         self.container_y = self.container_y - 1
         self.brick_manager.copyToBricksArray(self.container_x, self.container_y, self.bricks_array)  
     
-        # 消除方塊行數計算
+        # 消除方塊和相關參數計算
         lines = self.ifClearBrick() // 10;        
         if (lines > 0):
             if lines > self.lines_number_max:
@@ -105,8 +120,10 @@ class Game:
             
             self.lines_number = self.lines_number + lines
 
+            self.score += self.calculateScore(lines)
+
             # 每消10行等級+1
-            if self.lines_number >= self.game_level * 10:
+            if self.score >= self.game_level * 10000:
                 self.game_level += 1
                 self.brick_down_speed = max(brick_down_speed_max - (self.game_level * 0.05), 0.1)
 
