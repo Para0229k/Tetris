@@ -89,16 +89,21 @@ class Display:
     # 顯示訊息
     def displayGameInfo(self, game, clock):
         self.showFont("Next", 588, 16, color_gray)
+
         self.showFont("Max", 588, 190, color_gray)
         self.showFont(str(int(game.lines_number_max)), 588, 220, color_gray)
         
         self.showFont("Cumulate", 588, 260, color_gray)
         self.showFont(str(int(game.lines_number)), 588, 290, color_gray)
 
-        self.showFont("Level", 588, 330, color_gray)
-        self.showFont(str(int(game.game_level)), 588, 360, color_gray)
+        self.showFont("Score", 588, 330, color_gray)
+        show_text = f"{game.score:,}"
+        self.showFont(show_text, 588, 360, color_gray)
 
         self.showFont("Hold", 588, 400, color_gray)
+
+        self.showFont("Level", 200, 535, color_gray)
+        self.showFont(str(int(game.game_level)), 255, 535, color_gray)
 
         # 在除錯訊息顯示FPS
         if(game.debug_message):    
