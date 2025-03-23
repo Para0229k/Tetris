@@ -8,6 +8,8 @@ class Game:
         self.debug_message = False
         self.lines_number_max = 0
         self.score = 0
+        self.instructions_mode = True
+        self.instruction_page = 1
 
         # 方塊陣列(10x20)
         self.bricks_array = []
@@ -44,6 +46,9 @@ class Game:
 
         self.hold_id = 0
         self.can_hold = True
+
+        self.instructions_mode = True
+        self.instruction_page = 1
 
         # 清除方塊陣列(10x20)
         for x in range(10):
@@ -144,6 +149,7 @@ class Game:
             old_max = self.lines_number_max
             self.resetGame()
             self.lines_number_max = old_max
+            self.instructions_mode = False
 
     # Hold功能處理
     def holdBrick(self):
