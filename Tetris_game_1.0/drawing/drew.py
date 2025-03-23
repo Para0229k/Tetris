@@ -108,3 +108,144 @@ class Display:
         # 在除錯訊息顯示FPS
         if(game.debug_message):    
             self.showFont("FPS:" + str(clock.get_fps()), 6, 0, color_gray_green) 
+    
+    # 遊戲說明
+    def displayInstruction(self, page=1):
+        # 背景
+        pygame.draw.rect(self.canvas, color_gray, [100, 50, 600, 500])
+        
+        # 標題
+        title_text = self.font.render("Tetris Game Instruction", True, color_white)
+        title_width = title_text.get_width()
+        self.canvas.blit(title_text, (400 - title_width // 2, 80))
+
+        # 頁碼
+        page_text = self.font.render(f"Page {page}/2", True, color_white)
+        self.canvas.blit(page_text, (600, 70))
+
+        # 分隔線
+        pygame.draw.line(self.canvas, color_white, [150, 120], [650, 120], 2)
+
+        line_height = 30
+        y_pos = 150
+
+        # pg.1 遊戲系統&顯示說明
+        if page == 1:
+            # 遊戲系統說明
+            left_x = 150
+            left_y = 150
+            
+            self.showFont("Game System", left_x, left_y, color_white)
+            left_y += 40
+    
+            self.showFont("- Level increases every", left_x, left_y, color_white)
+            left_y += 25
+            self.showFont("  10,000 points", left_x, left_y, color_white)
+            left_y += 35
+    
+            self.showFont("- Each level increases", left_x, left_y, color_white)
+            left_y += 25
+            self.showFont("  falling speed", left_x, left_y, color_white)
+            left_y += 35
+    
+            self.showFont("- Score by lines cleared:", left_x, left_y, color_white)
+            left_y += 30
+        
+            self.showFont("  Single: 1,000 points", left_x, left_y, color_white)
+            left_y += 25
+        
+            self.showFont("  Double: 3,000 points", left_x, left_y, color_white)
+            left_y += 25
+        
+            self.showFont("  Triple: 5,000 points", left_x, left_y, color_white)
+            left_y += 25
+        
+            self.showFont("  Tetris: 8,000 points", left_x, left_y, color_white)
+
+            # 顯示說明
+            right_x = 400
+            right_y = 150
+            
+            self.showFont("Display Information", right_x, right_y, color_white)
+            right_y += 40
+    
+            self.showFont("- Next:", right_x, right_y, color_white)
+            right_y += 25
+            self.showFont("  Preview of next tetromino", right_x, right_y, color_white)
+            right_y += 35
+        
+            self.showFont("- Max:", right_x, right_y, color_white)
+            right_y += 25
+            self.showFont("  Maximum lines cleared", right_x, right_y, color_white)
+            right_y += 35
+        
+            self.showFont("- Cumulate:", right_x, right_y, color_white)
+            right_y += 25
+            self.showFont("  Total lines cleared", right_x, right_y, color_white)
+            right_y += 35
+        
+            self.showFont("- Score:", right_x, right_y, color_white)
+            right_y += 25
+            self.showFont("  Your current score", right_x, right_y, color_white)
+            right_y += 35
+        
+            self.showFont("- Hold:", right_x, right_y, color_white)
+            right_y += 25
+            self.showFont("  Reserved tetromino", right_x, right_y, color_white)
+            right_y += 35
+
+            self.showFont("- Level:", right_x, right_y, color_white)
+            right_y += 25
+            self.showFont("  Current game level", right_x, right_y, color_white)
+        
+            prompt_text = self.font.render("Press any key to continue", True, color_white)
+            text_width = prompt_text.get_width()
+            self.canvas.blit(prompt_text, (250 - text_width // 2, 520))
+        # pg.2 操作方式說明
+        elif page == 2:
+            center_x = 400
+            y_pos = 100
+            
+            title_text = self.font.render("Controls", True, color_white)
+            title_width = title_text.get_width()
+            self.canvas.blit(title_text, (center_x - title_width // 2, y_pos))
+            y_pos += 50
+        
+            control_bg = pygame.Rect(170, y_pos, 460, 45)
+            pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+            self.showFont("Left / Right", 200, y_pos + 12, color_white)
+            self.showFont("Move horizontally", 380, y_pos + 12, color_white)
+            y_pos += 60
+        
+            control_bg = pygame.Rect(170, y_pos, 460, 45)
+            pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+            self.showFont("Up", 200, y_pos + 12, color_white)
+            self.showFont("Rotate", 380, y_pos + 12, color_white)
+            y_pos += 60
+        
+            control_bg = pygame.Rect(170, y_pos, 460, 45)
+            pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+            self.showFont("Down", 200, y_pos + 12, color_white)
+            self.showFont("Speed up falling", 380, y_pos + 12, color_white)
+            y_pos += 60
+        
+            control_bg = pygame.Rect(170, y_pos, 460, 45)
+            pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+            self.showFont("Space", 200, y_pos + 12, color_white)
+            self.showFont("Hold the current tetromino", 380, y_pos + 12, color_white)
+            y_pos += 60
+        
+            control_bg = pygame.Rect(170, y_pos, 460, 45)
+            pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+            self.showFont("D", 200, y_pos + 12, color_white)
+            self.showFont("Show debug information", 380, y_pos + 12, color_white)
+            y_pos += 60
+        
+            control_bg = pygame.Rect(170, y_pos, 460, 45)
+            pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+            self.showFont("ESC", 200, y_pos + 12, color_white)
+            self.showFont("Quit the game", 380, y_pos + 12, color_white)
+        
+            prompt_text = self.font.render("Press any key to start game", True, color_white)
+            text_width = prompt_text.get_width()
+            self.canvas.blit(prompt_text, (400 - text_width // 2, 520))
