@@ -81,6 +81,15 @@ def main():
                             game.instruction_page = 2
                         else:
                             game.instructions_mode = False
+            elif game.game_over_screen:
+                # 結算畫面
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+                    elif event.key == pygame.K_r:
+                        game.restartGame()
+                        brick_manager.transformToBricks(game.brick_id, game.brick_state)
+
             else:     
                 # 按下按鍵
                 if event.type == pygame.KEYDOWN:
@@ -184,6 +193,13 @@ def main():
         # 說明介面
         if game.instructions_mode:
             display.displayInstruction(game.instruction_page)
+            pygame.display.update()
+            clock.tick(60)
+            continue
+
+        # 結算畫面
+        if game.game_over_screen:
+            display.displayGameOver(game)
             pygame.display.update()
             clock.tick(60)
             continue
