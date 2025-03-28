@@ -10,6 +10,7 @@ class Game:
         self.score = 0
         self.instructions_mode = True
         self.instruction_page = 1
+        self.game_over_screen = False
 
         # 方塊陣列(10x20)
         self.bricks_array = []
@@ -42,6 +43,7 @@ class Game:
         self.game_mode = 0
         self.game_level = 1
         self.game_over = False
+        self.game_over_screen = False
         self.score = 0
 
         self.hold_id = 0
@@ -110,7 +112,7 @@ class Game:
     def brickNew(self):
         # 判斷GameOver
         self.game_over = False
-        if (self.container_y < 0):
+        if not self.instructions_mode and self.container_y < 0:
             self.game_over = True
 
         # 複製方塊到容器內
@@ -130,7 +132,7 @@ class Game:
             # 每消10行等級+1
             if self.score >= self.game_level * 10000:
                 self.game_level += 1
-                self.brick_down_speed = max(brick_down_speed_max - (self.game_level * 0.05), 0.1)
+                self.brick_down_speed = brick_down_speed_max * (0.8 ** self.game_level)
 
             self.game_mode = 1
 
@@ -145,11 +147,20 @@ class Game:
 
         self.can_hold = True
 
-        if (self.game_over):
-            old_max = self.lines_number_max
-            self.resetGame()
-            self.lines_number_max = old_max
-            self.instructions_mode = False
+        if (self.game_over and not self.instructions_mode):
+            if self.lines_number > self.lines_number_max:
+                self.lines_number_max = self.lines_number
+            
+            self.game_over_screen = True
+            self.game_mode = 2
+
+    # 重新開始遊戲
+    def restartGame(self):
+        old_max = self.lines_number_max
+        self.resetGame()
+        self.lines_number_max = old_max
+        self.instructions_mode = False
+        self.game_over_screen = False
 
     # Hold功能處理
     def holdBrick(self):
