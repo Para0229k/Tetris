@@ -249,3 +249,49 @@ class Display:
             prompt_text = self.font.render("Press any key to start game", True, color_white)
             text_width = prompt_text.get_width()
             self.canvas.blit(prompt_text, (400 - text_width // 2, 520))
+
+    # 結算畫面
+    def displayGameOver(self, game):
+        # 背景
+        pygame.draw.rect(self.canvas, color_gray, [100, 100, 600, 400])
+        
+        # 標題
+        title_text = self.font.render("Game Over", True, color_white)
+        title_width = title_text.get_width()
+        self.canvas.blit(title_text, (400 - title_width // 2, 130))
+
+        # 分隔線
+        pygame.draw.line(self.canvas, color_white, [150, 170], [650, 170], 2)
+
+        # 結算訊息
+        stats_y = 210
+        stats_x = 300
+
+        self.showFont("Level:", stats_x, stats_y, color_white)
+        self.showFont(str(int(game.game_level)), stats_x + 200, stats_y, color_white)
+        stats_y += 40
+
+        self.showFont("Score:", stats_x, stats_y, color_white)
+        show_text = f"{game.score:,}"
+        self.showFont(show_text, stats_x + 200, stats_y, color_white)
+        stats_y += 40
+
+        self.showFont("Cumulate Lines:", stats_x, stats_y, color_white)
+        self.showFont(str(int(game.lines_number)), stats_x + 200, stats_y, color_white)
+        stats_y += 40
+
+        self.showFont("Max Lines:", stats_x, stats_y, color_white)
+        self.showFont(str(int(game.lines_number_max)), stats_x + 200, stats_y, color_white)
+        stats_y += 70
+
+        # 結算提示
+        control_bg = pygame.Rect(200, stats_y, 400, 45)
+        pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+        control_text = self.font.render("Press R to restart", True, color_white)
+        self.canvas.blit(control_text, (400 - control_text.get_width() // 2, stats_y + 12))
+        
+        stats_y += 50
+        control_bg = pygame.Rect(200, stats_y, 400, 45)
+        pygame.draw.rect(self.canvas, color_gray_block, control_bg)
+        control_text = self.font.render("Press ESC to quit", True, color_white)
+        self.canvas.blit(control_text, (400 - control_text.get_width() // 2, stats_y + 12))
