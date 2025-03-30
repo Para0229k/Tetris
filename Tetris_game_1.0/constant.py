@@ -1,6 +1,6 @@
-# 磚塊加速速度
+# 方塊加速速度
 brick_drop_rapidly   = 0.05
-# 磚塊正常速度
+# 方塊正常速度
 brick_down_speed_max = 0.4
 
 # 視窗大小
@@ -8,14 +8,23 @@ canvas_width = 800
 canvas_height = 600
 
 # 定義顏色
-color_block         = (0,0,0)
-color_white         = (255, 255, 255)
-color_red           = (255, 0, 0)
-color_gray          = (107,130,114)
-color_gray_block    = (20,31,23)
-color_gray_green    = (0, 255, 0)
+color_block         = (20, 30, 45)
+color_white         = (235, 240, 255)
+color_red           = (235, 85, 95)
+color_gray          = (80, 110, 150)
+color_gray_block    = (50, 60, 85)
+color_gray_green    = (110, 220, 110)
 
-# 定義磚塊
+color_brick_S       = (65, 175, 245)    
+color_brick_Z       = (235, 120, 120)  #x   
+color_brick_J       = (120, 50, 240) #x   
+color_brick_L       = (245, 175, 65)    
+color_brick_T       = (85, 195, 95)     
+color_brick_O       = (245, 225, 80)    
+color_brick_I       = (95, 220, 215)    
+
+
+# 定義方塊
 brick_dict = {
     "10": ( 4, 8, 9,13), "11": ( 9,10,12,13),   # S
     "20": ( 5, 8, 9,12), "21": ( 8, 9,13,14),   # Z
