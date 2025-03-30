@@ -1,4 +1,5 @@
 from constant import brick_dict
+from drawing.drew import *
 
 class BrickManager:
     # 初始化方塊
@@ -86,6 +87,21 @@ class BrickManager:
             pos_x = 592
             for x in range(4):
                 if(self.bricks_next[x][y] != 0):
+                    if brickId == 1:
+                        self.bricks_next_object[x][y].color = color_brick_S
+                    elif brickId == 2:
+                        self.bricks_next_object[x][y].color = color_brick_Z
+                    elif brickId == 3:
+                        self.bricks_next_object[x][y].color = color_brick_J
+                    elif brickId == 4:
+                        self.bricks_next_object[x][y].color = color_brick_L
+                    elif brickId == 5:
+                        self.bricks_next_object[x][y].color = color_brick_T
+                    elif brickId == 6:
+                        self.bricks_next_object[x][y].color = color_brick_O
+                    elif brickId == 7:
+                        self.bricks_next_object[x][y].color = color_brick_I
+                    
                     self.bricks_next_object[x][y].rect[0] = pos_x
                     self.bricks_next_object[x][y].rect[1] = pos_y
                     self.bricks_next_object[x][y].update()
@@ -113,6 +129,21 @@ class BrickManager:
             pos_x = 592
             for x in range(4):
                 if(self.bricks_hold[x][y] != 0):
+                    if hold_id == 1:
+                        self.bricks_next_object[x][y].color = color_brick_S
+                    elif hold_id == 2:
+                        self.bricks_next_object[x][y].color = color_brick_Z
+                    elif hold_id == 3:
+                        self.bricks_next_object[x][y].color = color_brick_J
+                    elif hold_id == 4:
+                        self.bricks_next_object[x][y].color = color_brick_L
+                    elif hold_id == 5:
+                        self.bricks_next_object[x][y].color = color_brick_T
+                    elif hold_id == 6:
+                        self.bricks_next_object[x][y].color = color_brick_O
+                    elif hold_id == 7:
+                        self.bricks_next_object[x][y].color = color_brick_I
+
                     self.bricks_hold_object[x][y].rect[0] = pos_x
                     self.bricks_hold_object[x][y].rect[1] = pos_y
                     self.bricks_hold_object[x][y].update()
