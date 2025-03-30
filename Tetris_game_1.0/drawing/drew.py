@@ -1,5 +1,5 @@
 import pygame
-from constant import color_gray, color_gray_block, color_red, color_white, color_gray_green
+from constant import *
 
 # 繪製矩形
 class Box(object):
@@ -42,6 +42,24 @@ class Display:
             pos_x = 280
             for x in range(10):
                 if(game.bricks_array[x][y] != 0):
+                    brick_id = game.bricks_array[x][y]
+                    if brick_id == 1:
+                        brick_list[y][x].color = color_brick_S
+                    elif brick_id == 2:
+                        brick_list[y][x].color = color_brick_Z
+                    elif brick_id == 3:
+                        brick_list[y][x].color = color_brick_J
+                    elif brick_id == 4:
+                        brick_list[y][x].color = color_brick_L
+                    elif brick_id == 5:
+                        brick_list[y][x].color = color_brick_T
+                    elif brick_id == 6:
+                        brick_list[y][x].color = color_brick_O
+                    elif brick_id == 7:
+                        brick_list[y][x].color = color_brick_I
+                    elif brick_id == 9:
+                        brick_list[y][x].color = color_red
+                    
                     brick_list[y][x].rect[0] = pos_x
                     brick_list[y][x].rect[1] = pos_y
                     brick_list[y][x].update()
@@ -55,6 +73,22 @@ class Display:
                     posX = game.container_x + x
                     posY = game.container_y + y
                     if (posX >= 0 and posY >= 0 and posY < 20 and posX < 10):
+                        brick_id = brick_manager.bricks[x][y]
+                        if brick_id == 1:
+                            brick_list[posY][posX].color = color_brick_S
+                        elif brick_id == 2:
+                            brick_list[posY][posX].color = color_brick_Z
+                        elif brick_id == 3:
+                            brick_list[posY][posX].color = color_brick_J
+                        elif brick_id == 4:
+                            brick_list[posY][posX].color = color_brick_L
+                        elif brick_id == 5:
+                            brick_list[posY][posX].color = color_brick_T
+                        elif brick_id == 6:
+                            brick_list[posY][posX].color = color_brick_O
+                        elif brick_id == 7:
+                            brick_list[posY][posX].color = color_brick_I
+                        
                         brick_list[posY][posX].rect[0] = (posX * 28) + 280
                         brick_list[posY][posX].rect[1] = (posY * 28) + 20
                         brick_list[posY][posX].update()
