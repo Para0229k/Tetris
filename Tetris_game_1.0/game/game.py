@@ -33,8 +33,6 @@ class Game:
     def resetGame(self):
         self.container_x = 3
         self.container_y = -4
-
-        self.brick_down_speed = brick_down_speed_max
         
         self.brick_id = 1
         self.brick_state = 0
@@ -45,6 +43,8 @@ class Game:
         self.game_over = False
         self.game_over_screen = False
         self.score = 0
+
+        self.brick_down_speed = brick_down_speed_max * (0.9 ** self.game_level)
 
         self.hold_id = 0
         self.can_hold = True
@@ -132,7 +132,8 @@ class Game:
             # 每消10行等級+1
             if self.score >= self.game_level * 10000:
                 self.game_level += 1
-                self.brick_down_speed = brick_down_speed_max * (0.8 ** self.game_level)
+                self.brick_down_speed = brick_down_speed_max * (0.9 ** self.game_level)
+                
 
             self.game_mode = 1
 
