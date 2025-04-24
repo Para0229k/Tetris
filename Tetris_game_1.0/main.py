@@ -186,7 +186,7 @@ def main():
                 if event.type == pygame.KEYUP:
                     # 放開下 - 恢復正常速度 
                     if event.key == pygame.K_DOWN:
-                        game.brick_down_speed = brick_down_speed_max
+                        game.brick_down_speed = brick_down_speed_max * (0.9 ** game.game_level)
         
         canvas.fill(color_block)
 
