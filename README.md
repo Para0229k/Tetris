@@ -2,7 +2,8 @@
 
 用Pygame製作的俄羅斯方塊遊戲，Python版本為3.11.7  
 
-![螢幕擷取畫面 2025-04-23 224649](https://github.com/user-attachments/assets/ea5e0fee-959d-4b27-ab80-1218ba4859c3)
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/e50dd60b-0ad8-4be6-a45f-cec1b745796a" />
+
 
 > 目錄  
 > [1. 檔案結構](#1-檔案結構)  
@@ -49,7 +50,8 @@ Tetris/
 
 ## 3. 規則與功能說明
 
-![image](https://github.com/user-attachments/assets/1e299d0b-80e3-48c6-8f1c-7755d8e03e4a)  
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/1344d81b-9df2-4053-968d-dce7b79faad2" />
+
 
 |功能|說明|顯示欄位|說明|
 |-------|-----------------------------------------------|------|---------------|
@@ -65,7 +67,8 @@ Tetris/
 
 ## 4. 操作說明
 
-![image](https://github.com/user-attachments/assets/407a32c6-7bed-4bf5-afc8-d91a4f2affb2)
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/e5191540-0de0-4d10-a25f-e1c5885722ff" />
+
 
 |按鍵|功能|按鍵|功能|
 |:------:|------|:------:|------|
@@ -116,23 +119,22 @@ Tetris/
 
 ### ▸ 規則說明畫面
 > 顯示遊戲規則、功能、顯示畫面說明，瀏覽後按任意按鍵前往下一頁
-![image](https://github.com/user-attachments/assets/1e299d0b-80e3-48c6-8f1c-7755d8e03e4a)  
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/bd656779-0448-4239-838e-f2cedbdca277" />
+
 
 ### ▸ 操作介面畫面  
 > 顯示操作方式和說明  
-![image](https://github.com/user-attachments/assets/407a32c6-7bed-4bf5-afc8-d91a4f2affb2)
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/4924b2de-032c-406f-9e5d-ff548290c927" />
+
 
 ### ▸ 遊戲畫面  
 > 遊戲進行中
-![螢幕擷取畫面 2025-04-23 224649](https://github.com/user-attachments/assets/ea5e0fee-959d-4b27-ab80-1218ba4859c3)
-
-### ▸ 遊戲畫面（開啟除錯訊息）  
-> 遊戲進行中（開啟除錯訊息）  
-![螢幕擷取畫面 2025-04-23 224950](https://github.com/user-attachments/assets/eb15dfea-23a1-4328-b942-bfecc8b6a46c)  
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/10970b9b-e01b-4c75-80a4-ec629f15d5a1" />
 
 ### ▸ 結算畫面  
 > 結算畫面  
-![螢幕擷取畫面 2025-04-23 224707](https://github.com/user-attachments/assets/600b587f-f5ce-4cb4-a4df-53ccfbe66747)  
+<img width="735" height="auto" src="https://github.com/user-attachments/assets/6e8b5eec-82ed-49da-9584-9f5eafc017d7" />
+
 
 
 
